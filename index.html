@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adhiraag Shivan | Self-Directed Visual Artist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --tertiary-bg: #2a2a2a;
+            --accent-gold: #d4af37;
+            --accent-bronze: #b8935a;
+            --text-light: #f5f5f5;
+            --text-cream: #e8e8e8;
+            --text-gray: #a8a8a8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        .nav.scrolled {
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .nav__logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav__links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav__link {
+            color: var(--text-cream);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav__link:hover::after,
+        .nav__link.active::after {
+            width: 100%;
+        }
+
+        .nav__link:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+            z-index: 0;
+        }
+
+        .hero__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.4);
+            z-index: 1;
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero__title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            color: var(--text-light);
+        }
+
+        .hero__subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            color: var(--accent-gold);
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
+
+        .hero__tagline {
+            font-size: 1.1rem;
+            color: var(--text-cream);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .hero__cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: transparent;
+            color: var(--accent-gold);
+            text-decoration: none;
+            border: 2px solid var(--accent-gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero__cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--accent-gold);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .hero__cta:hover::before {
+            left: 0;
+        }
+
+        .hero__cta:hover {
+            color: var(--primary-bg);
+        }
+
+        .hero__scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        .hero__scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, var(--accent-gold));
+            margin: 0 auto 0.5rem;
+        }
+
+        .hero__scroll-text {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-gray);
+        }
+
+        /* Premium Card Deck Carousel */
+        .card-carousel {
+            padding: 8rem 0;
+            background-color: var(--secondary-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-carousel__header {
+            text-align: center;
+            margin-bottom: 5rem;
+            padding: 0 2rem;
+        }
+
+        .card-carousel__title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .card-carousel__subtitle {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            font-weight: 300;
+        }
+
+        .card-carousel__container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1500px;
+        }
+
+        .card-carousel__track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            position: absolute;
+            width: 350px;
+            height: 500px;
+            background-color: var(--tertiary-bg);
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .card__image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card__image {
+            transform: scale(1.05);
+        }
+
+        .card__overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.95), transparent);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card__overlay {
+            transform: translateY(0);
+        }
+
+        .card__caption {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .card__meta {
+            color: var(--accent-gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* Card positions for deck effect */
+        .card--active {
+            transform: translateX(0) translateZ(0) rotateY(0deg) scale(1);
+            z-index: 5;
+            opacity: 1;
+        }
+
+        .card--next {
+            transform: translateX(280px) translateZ(-100px) rotateY(-15deg) scale(0.9);
+            z-index: 4;
+            opacity: 0.8;
+        }
+
+        .card--next-2 {
+            transform: translateX(480px) translateZ(-200px) rotateY(-25deg) scale(0.8);
+            z-index: 3;
+            opacity: 0.5;
+        }
+
+        .card--prev {
+            transform: translateX(-280px) translateZ(-100px) rotateY(15deg) scale(0.9);
+            z-index: 4;
+            opacity: 0.8;
+        }
+
+        .card--prev-2 {
+            transform: translateX(-480px) translateZ(-200px) rotateY(25deg) scale(0.8);
+            z-index: 3;
+            opacity: 0.5;
+        }
+
+        .card--hidden {
+            transform: translateX(0) translateZ(-300px) scale(0.5);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .card-carousel__controls {
+            position: absolute;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .card-carousel__button {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 300;
+        }
+
+        .card-carousel__button:hover {
+            background-color: var(--accent-gold);
+            color: var(--primary-bg);
+            transform: scale(1.1);
+        }
+
+        .card-carousel__counter {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .card-carousel__current {
+            color: var(--accent-gold);
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        /* Collections Section */
+        .collections {
+            padding: 8rem 3rem;
+            background-color: var(--primary-bg);
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            margin-bottom: 5rem;
+            font-weight: 300;
+        }
+
+        .collections__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .collection-card {
+            position: relative;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .collection-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .collection-card__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .collection-card:hover .collection-card__bg {
+            transform: scale(1.1);
+        }
+
+        .collection-card__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3), rgba(10, 10, 10, 0.9));
+            transition: background 0.3s ease;
+        }
+
+        .collection-card:hover .collection-card__overlay {
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.95));
+        }
+
+        .collection-card__content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 2rem;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .collection-card__theme {
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-card__title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .collection-card__subtitle {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-card__details {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            font-style: italic;
+        }
+
+        /* Collection Detail View */
+        .collection-detail {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--primary-bg);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .collection-detail.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .collection-detail__close {
+            position: fixed;
+            top: 2rem;
+            right: 3rem;
+            z-index: 2001;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .collection-detail__close:hover {
+            transform: rotate(90deg);
+            color: var(--accent-gold);
+        }
+
+        .collection-detail__hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .collection-detail__hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .collection-detail__hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.5);
+            z-index: 1;
+        }
+
+        .collection-detail__hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .collection-detail__title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .collection-detail__subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .collection-detail__meta {
+            font-size: 1rem;
+            color: var(--text-gray);
+        }
+
+        .collection-detail__story {
+            padding: 6rem 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .collection-detail__story-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .collection-detail__story-text {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--text-cream);
+            font-weight: 300;
+        }
+
+        .collection-detail__gallery {
+            padding: 4rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .gallery__grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .gallery__grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .gallery__item {
+            position: relative;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery__item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery__item-bg {
+            width: 100%;
+            height: 100%;
+            background-color: var(--secondary-bg);
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery__item:hover .gallery__item-bg {
+            transform: scale(1.1);
+        }
+
+        .gallery__caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
+            color: var(--text-cream);
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery__item:hover .gallery__caption {
+            opacity: 1;
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 3rem;
+            background-color: var(--secondary-bg);
+        }
+
+        .about__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about__image {
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(135deg, var(--accent-bronze), var(--tertiary-bg));
+            border-radius: 8px;
+        }
+
+        .about__content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .about__tagline {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .about__text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-cream);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .about__approach {
+            padding: 2rem;
+            background-color: var(--tertiary-bg);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+
+        .about__approach-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 8rem 3rem;
+            background-color: var(--primary-bg);
+            text-align: center;
+        }
+
+        .newsletter__container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .newsletter__title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .newsletter__subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .newsletter__form {
+            display: flex;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .newsletter__input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            background-color: var(--secondary-bg);
+            border: 2px solid var(--tertiary-bg);
+            color: var(--text-light);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        .newsletter__input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .newsletter__input::placeholder {
+            color: var(--text-gray);
+        }
+
+        .newsletter__button {
+            padding: 1.2rem 2.5rem;
+            background-color: var(--accent-gold);
+            color: var(--primary-bg);
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter__button:hover {
+            background-color: var(--accent-bronze);
+            transform: translateY(-2px);
+        }
+
+        .newsletter__note {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 3rem;
+            background-color: var(--secondary-bg);
+            text-align: center;
+        }
+
+        .contact__title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .contact__subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .contact__social {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact__social-link {
+            color: var(--text-cream);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .contact__social-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .contact__social-link:hover::after {
+            width: 100%;
+        }
+
+        .contact__social-link:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox__close {
+            position: fixed;
+            top: 2rem;
+            right: 3rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 3001;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox__close:hover {
+            color: var(--accent-gold);
+        }
+
+        .lightbox__content {
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lightbox__image {
+            max-width: 100%;
+            max-height: 80vh;
+            background-color: var(--secondary-bg);
+            border-radius: 4px;
+        }
+
+        .lightbox__caption {
+            color: var(--text-cream);
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .lightbox__nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 1rem;
+            transition: color 0.3s ease;
+            z-index: 3001;
+        }
+
+        .lightbox__nav:hover {
+            color: var(--accent-gold);
+        }
+
+        .lightbox__nav--prev {
+            left: 2rem;
+        }
+
+        .lightbox__nav--next {
+            right: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav__links {
+                display: none;
+            }
+
+            .card-carousel {
+                padding: 6rem 0;
+            }
+
+            .card-carousel__container {
+                height: 500px;
+            }
+
+            .card {
+                width: 280px;
+                height: 400px;
+            }
+
+            .card--next {
+                transform: translateX(200px) translateZ(-80px) rotateY(-10deg) scale(0.85);
+            }
+
+            .card--prev {
+                transform: translateX(-200px) translateZ(-80px) rotateY(10deg) scale(0.85);
+            }
+
+            .card--next-2,
+            .card--prev-2 {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .collections {
+                padding: 4rem 1.5rem;
+            }
+
+            .collections__grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .collection-card {
+                height: 400px;
+            }
+
+            .about__container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about__image {
+                height: 400px;
+            }
+
+            .gallery__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .collection-detail__close {
+                right: 1.5rem;
+            }
+
+            .lightbox__nav {
+                font-size: 2rem;
+            }
+
+            .lightbox__nav--prev {
+                left: 0.5rem;
+            }
+
+            .lightbox__nav--next {
+                right: 0.5rem;
+            }
+
+            .newsletter__form {
+                flex-direction: column;
+            }
+
+            .newsletter__button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="#hero" class="nav__logo">ADHIRAAG SHIVAN</a>
+        <ul class="nav__links">
+            <li><a href="#hero" class="nav__link">Home</a></li>
+            <li><a href="#gallery" class="nav__link">Gallery</a></li>
+            <li><a href="#collections" class="nav__link">Collections</a></li>
+            <li><a href="#about" class="nav__link">About</a></li>
+            <li><a href="#newsletter" class="nav__link">Newsletter</a></li>
+            <li><a href="#contact" class="nav__link">Connect</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero__bg"></div>
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+            <h1 class="hero__title">ADHIRAAG SHIVAN</h1>
+            <p class="hero__subtitle">Self-Curated | Self-Directed | Self-Shot</p>
+            <p class="hero__tagline">Where Creative Vision Meets Personal Expression. Every frame is a reflection of my journey as both the artist and the canvas—conceptualized, directed, and modeled by me.</p>
+            <a href="#gallery" class="hero__cta">Explore My Work</a>
+        </div>
+        <div class="hero__scroll">
+            <div class="hero__scroll-line"></div>
+            <p class="hero__scroll-text">Scroll</p>
+        </div>
+    </section>
+
+    <!-- Premium Card Deck Carousel -->
+    <section class="card-carousel" id="gallery">
+        <div class="card-carousel__header fade-in">
+            <h2 class="card-carousel__title">Featured Gallery</h2>
+            <p class="card-carousel__subtitle">Swipe through my curated photoshoot collection</p>
+        </div>
+
+        <div class="card-carousel__container">
+            <div class="card-carousel__track" id="cardTrack"></div>
+            
+            <div class="card-carousel__controls">
+                <button class="card-carousel__button" id="prevCard" aria-label="Previous">‹</button>
+                <div class="card-carousel__counter">
+                    <span class="card-carousel__current" id="currentCard">1</span>
+                    <span> / </span>
+                    <span id="totalCards"></span>
+                </div>
+                <button class="card-carousel__button" id="nextCard" aria-label="Next">›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section class="collections" id="collections">
+        <h2 class="section-title fade-in">Collections</h2>
+        <p class="section-subtitle fade-in">A curated journey through self-directed visual storytelling. Each collection represents a different facet of my creative exploration.</p>
+        <div class="collections__grid" id="collectionsGrid"></div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about__container">
+            <div class="about__image" style="background-image: url('50.png'); background-size: cover; background-position: center;"></div>
+            <div class="about__content fade-in">
+                <h2>Adhiraag Shivan</h2>
+                <p class="about__tagline">The Artist &amp; The Muse — In One Frame</p>
+                <p class="about__text">I am Adhiraag Shivan, a self-modeling content creator who blurs the lines between subject and artist. Every image you see is a reflection of my creative vision—conceptualized, directed, and modeled by me. My work explores identity, aesthetics, and the art of self-expression through the lens.</p>
+                <div class="about__approach">
+                    <h3 class="about__approach-title">My Approach</h3>
+                    <p class="about__text">I believe in the power of self-direction. By being both the creative mind and the canvas, I craft authentic visual narratives that celebrate individuality, style, and artistic experimentation. Each shoot is a journey of self-discovery and creative exploration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter" id="newsletter">
+        <div class="newsletter__container fade-in">
+            <h2 class="newsletter__title">Join My Creative Journey</h2>
+            <p class="newsletter__subtitle">Subscribe to receive exclusive behind-the-scenes content, new collection announcements, and creative insights directly in your inbox.</p>
+            <form class="newsletter__form" action="mailto:adhiraagshivan@gmail.com" method="get" enctype="text/plain">
+                <input type="email" name="email" class="newsletter__input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter__button">Subscribe</button>
+            </form>
+            <p class="newsletter__note">No spam, just creative updates. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="contact__title fade-in">Let's Connect</h2>
+        <p class="contact__subtitle fade-in">Follow my journey across platforms</p>
+        <div class="contact__social fade-in">
+            <a href="https://instagram.com/adhiraagshivan" class="contact__social-link" target="_blank">Instagram (Photography)</a>
+            <a href="https://instagram.com/adhiraagwrites" class="contact__social-link" target="_blank">Instagram (Writing)</a>
+            <a href="http://www.youtube.com/@AdhiraagWrites" class="contact__social-link" target="_blank">YouTube</a>
+            <a href="https://www.linkedin.com/in/adinarayana-rameswarapu-1636a7341" class="contact__social-link" target="_blank">LinkedIn</a>
+        </div>
+    </section>
+
+    <!-- Collection Detail View -->
+    <div class="collection-detail" id="collectionDetail">
+        <button class="collection-detail__close" id="closeDetail">&times;</button>
+        <div id="collectionDetailContent"></div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox__close" id="closeLightbox">&times;</button>
+        <button class="lightbox__nav lightbox__nav--prev" id="prevImage">&lsaquo;</button>
+        <div class="lightbox__content">
+            <div class="lightbox__image" id="lightboxImage"></div>
+            <p class="lightbox__caption" id="lightboxCaption"></p>
+        </div>
+        <button class="lightbox__nav lightbox__nav--next" id="nextImage">&rsaquo;</button>
+    </div>
+
+    <script>
+        // Data - Adhiraag Shivan Collections
+        const collections = [
+            {
+                id: 1,
+                title: "Urban Aesthetics",
+                subtitle: "City Streets & Concrete Dreams",
+                theme: "Urban Fashion",
+                description: "Exploring the intersection of fashion and urban landscapes. Shot across city rooftops, alleyways, and architectural marvels—where raw urban energy meets refined style.",
+                story: "The city became my studio, and its architecture my backdrop. These self-portraits capture moments of stillness amidst urban chaos, where every frame tells a story of individuality in a concrete jungle.",
+                heroColor: "#2a2a2a",
+                images: [
+                    { url: "2.webp", caption: "Rooftop solitude" },
+                    { url: "3.webp", caption: "Concrete canvas" },
+                    { url: "4.webp", caption: "Urban edge" },
+                    { url: "5.webp", caption: "City lines" },
+                    { url: "6.webp", caption: "Architectural frames" },
+                    { url: "7.webp", caption: "Street style" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Studio Elegance",
+                subtitle: "Minimalist Sophistication",
+                theme: "Studio Portraits",
+                description: "Clean lines, dramatic lighting, and timeless style. A celebration of minimalism where less becomes infinitely more.",
+                story: "In the controlled environment of the studio, I explored the power of negative space and shadow. Each shot is meticulously self-composed, playing with light and form to create images that feel both modern and timeless.",
+                heroColor: "#1a1a1a",
+                images: [
+                    { url: "10.jpg", caption: "Shadow play" },
+                    { url: "11.jpg", caption: "Minimal form" },
+                    { url: "12.jpg", caption: "Light study" },
+                    { url: "13.jpg", caption: "Elegant simplicity" },
+                ]
+            },
+            {
+                id: 3,
+                title: "Natural Light Series",
+                subtitle: "Golden Hour Magic",
+                theme: "Natural Light",
+                description: "Chasing the sun—soft, warm, and ethereal. Self-portraits bathed in the most beautiful natural light.",
+                story: "There's something magical about natural light. These photos capture fleeting moments during golden and blue hours, where the light itself becomes a collaborator in creating mood and atmosphere.",
+                heroColor: "#d4af37",
+                images: [
+                    { url: "15.jpg", caption: "Golden embrace" },
+                    { url: "16.jpg", caption: "Sunset glow" },
+                    { url: "17.jpg", caption: "Dawn reflections" },
+                    { url: "18.jpg", caption: "Natural warmth" },
+                    { url: "19.jpg", caption: "Light and shadow" },
+                ]
+            },
+            {
+                id: 5,
+                title: "Experimental Concepts",
+                subtitle: "Creative Boundaries",
+                theme: "Conceptual Art",
+                description: "Where art meets experimentation. Unconventional angles, bold compositions, and creative risk-taking.",
+                story: "Not every photo needs to follow the rules. This collection celebrates creative freedom—double exposures, unusual perspectives, and artistic choices that prioritize vision over convention.",
+                heroColor: "#3a2a2a",
+                images: [
+                    { url: "25.webp", caption: "Breaking rules" },
+                    { url: "26.webp", caption: "Abstract vision" },
+                    { url: "27.webp", caption: "Experimental frame" },
+                    { url: "28.webp", caption: "Creative chaos" },
+                ]
+            },
+            {
+                id: 4,
+                title: "Editorial Moments",
+                subtitle: "High Fashion Vision",
+                theme: "Editorial Fashion",
+                description: "Bold, dramatic, and unapologetically striking. Fashion-forward self-portraits that push boundaries and challenge conventions.",
+                story: "Inspired by editorial fashion photography, this collection represents my most daring creative choices. Every outfit, every angle, every expression was carefully crafted to create images that demand attention.",
+                heroColor: "#0a0a0a",
+                images: [
+                    { url: "24.webp", caption: "Bold statement" },
+                    { url: "23.webp", caption: "Fashion narrative" },
+                    { url: "22.webp", caption: "Dramatic presence" },
+                    { url: "21.webp", caption: "Editorial edge" },
+                    { url: "20.webp", caption: "Style manifesto" },
+                ]
+            },
+            {
+                id: 6,
+                title: "Experimental Concepts",
+                subtitle: "Creative Boundaries",
+                theme: "Conceptual Art",
+                description: "Where art meets experimentation. Unconventional angles, bold compositions, and creative risk-taking.",
+                story: "Not every photo needs to follow the rules. This collection celebrates creative freedom—double exposures, unusual perspectives, and artistic choices that prioritize vision over convention.",
+                heroColor: "#3a2a2a",
+                images: [
+                    { url: "30.jpg", caption: "Breaking rules" },
+                    { url: "33.jpg", caption: "Abstract vision" },
+                    { url: "32.jpg", caption: "Experimental frame" },
+                    { url: "29.jpg", caption: "Creative chaos" },
+                    { url: "31.jpg", caption: "Creative chaos" },
+                ]
+            },
+        ];
+
+        // Create all cards array
+        const allCards = [];
+        collections.forEach(collection => {
+            collection.images.forEach(img => {
+                allCards.push({
+                    url: img.url,
+                    caption: img.caption,
+                    collection: collection.title,
+                    theme: collection.theme
+                });
+            });
+        });
+
+        let currentCardIndex = 0;
+
+        // Initialize card carousel
+        function initializeCardCarousel() {
+            const track = document.getElementById('cardTrack');
+            
+            allCards.forEach((card, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.innerHTML = `
+                    <div class="card__image" style="background-image: url('${card.url}')"></div>
+                    <div class="card__overlay">
+                        <p class="card__caption">${card.caption}</p>
+                        <p class="card__meta">${card.collection} • ${card.theme}</p>
+                    </div>
+                `;
+                track.appendChild(cardElement);
+            });
+
+            document.getElementById('totalCards').textContent = allCards.length;
+            updateCardPositions();
+        }
+
+        function updateCardPositions() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach((card, index) => {
+                card.className = 'card';
+                
+                const diff = index - currentCardIndex;
+                
+                if (diff === 0) {
+                    card.classList.add('card--active');
+                } else if (diff === 1 || (diff === -(allCards.length - 1))) {
+                    card.classList.add('card--next');
+                } else if (diff === 2 || (diff === -(allCards.length - 2))) {
+                    card.classList.add('card--next-2');
+                } else if (diff === -1 || (diff === allCards.length - 1)) {
+                    card.classList.add('card--prev');
+                } else if (diff === -2 || (diff === allCards.length - 2)) {
+                    card.classList.add('card--prev-2');
+                } else {
+                    card.classList.add('card--hidden');
+                }
+            });
+
+            document.getElementById('currentCard').textContent = currentCardIndex + 1;
+        }
+
+        function nextCard() {
+            currentCardIndex = (currentCardIndex + 1) % allCards.length;
+            updateCardPositions();
+        }
+
+        function prevCard() {
+            currentCardIndex = (currentCardIndex - 1 + allCards.length) % allCards.length;
+            updateCardPositions();
+        }
+
+        document.getElementById('nextCard').addEventListener('click', nextCard);
+        document.getElementById('prevCard').addEventListener('click', prevCard);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextCard();
+            if (e.key === 'ArrowLeft') prevCard();
+        });
+
+        // Auto-play (optional)
+        let autoplayInterval = setInterval(nextCard, 2000);
+
+        // Pause autoplay on hover
+        document.querySelector('.card-carousel__container').addEventListener('mouseenter', () => {
+            clearInterval(autoplayInterval);
+        });
+
+        document.querySelector('.card-carousel__container').addEventListener('mouseleave', () => {
+            autoplayInterval = setInterval(nextCard, 2000);
+        });
+
+        // Navigation scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('.nav__link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Render collections
+        function renderCollections() {
+            const grid = document.getElementById('collectionsGrid');
+            grid.innerHTML = collections.map((collection, index) => `
+                <div class="collection-card fade-in" onclick="openCollection(${collection.id})" style="animation-delay: ${index * 0.1}s">
+                    <div class="collection-card__bg" style="background-image: url('${collection.images[0].url}'); background-size: cover; background-position: center;"></div>
+                    <div class="collection-card__overlay"></div>
+                    <div class="collection-card__content">
+                        <p class="collection-card__theme">${collection.theme}</p>
+                        <h3 class="collection-card__title">${collection.title}</h3>
+                        <p class="collection-card__subtitle">${collection.subtitle}</p>
+                        <p class="collection-card__details">${collection.images.length} images · Self-shot</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Open collection detail
+        function openCollection(id) {
+            const collection = collections.find(c => c.id === id);
+            const detailView = document.getElementById('collectionDetail');
+            const content = document.getElementById('collectionDetailContent');
+            
+            content.innerHTML = `
+                <div class="collection-detail__hero">
+                    <div class="collection-detail__hero-bg" style="background-image: url('${collection.images[0].url}'); background-size: cover; background-position: center;"></div>
+                    <div class="collection-detail__hero-overlay"></div>
+                    <div class="collection-detail__hero-content">
+                        <h1 class="collection-detail__title">${collection.title}</h1>
+                        <p class="collection-detail__subtitle">${collection.subtitle}</p>
+                        <p class="collection-detail__meta">${collection.images.length} images · ${collection.theme}</p>
+                    </div>
+                </div>
+                <div class="collection-detail__story">
+                    <h2 class="collection-detail__story-title">The Story</h2>
+                    <p class="collection-detail__story-text">${collection.story}</p>
+                </div>
+                <div class="collection-detail__gallery">
+                    <div class="gallery__grid">
+                        ${collection.images.map((img, index) => `
+                            <div class="gallery__item" onclick="openLightbox(${id}, ${index})">
+                                <div class="gallery__item-bg" style="background-image: url('${img.url}'); background-size: cover; background-position: center;"></div>
+                                <div class="gallery__caption">${img.caption}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            detailView.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            clearInterval(autoplayInterval);
+        }
+
+        // Close collection detail
+        document.getElementById('closeDetail').addEventListener('click', () => {
+            document.getElementById('collectionDetail').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            autoplayInterval = setInterval(nextCard, 4000);
+        });
+
+        // Lightbox functionality
+        let currentCollectionId = null;
+        let currentImageIndex = 0;
+
+        function openLightbox(collectionId, imageIndex) {
+            currentCollectionId = collectionId;
+            currentImageIndex = imageIndex;
+            updateLightboxImage();
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function updateLightboxImage() {
+            const collection = collections.find(c => c.id === currentCollectionId);
+            const image = collection.images[currentImageIndex];
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            
+            lightboxImage.style.backgroundImage = `url('${image.url}')`;
+            lightboxImage.style.backgroundSize = 'cover';
+            lightboxImage.style.backgroundPosition = 'center';
+            lightboxImage.style.width = 'auto';
+            lightboxImage.style.height = '70vh';
+            lightboxImage.style.aspectRatio = '3 / 4';
+            lightboxImage.style.maxWidth = '90vw';
+            lightboxCaption.textContent = image.caption;
+        }
+
+        document.getElementById('closeLightbox').addEventListener('click', () => {
+            document.getElementById('lightbox').classList.remove('active');
+        });
+
+        document.getElementById('prevImage').addEventListener('click', () => {
+            const collection = collections.find(c => c.id === currentCollectionId);
+            currentImageIndex = (currentImageIndex - 1 + collection.images.length) % collection.images.length;
+            updateLightboxImage();
+        });
+
+        document.getElementById('nextImage').addEventListener('click', () => {
+            const collection = collections.find(c => c.id === currentCollectionId);
+            currentImageIndex = (currentImageIndex + 1) % collection.images.length;
+            updateLightboxImage();
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        function observeElements() {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Initialize
+        initializeCardCarousel();
+        renderCollections();
+        setTimeout(observeElements, 100);
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav__link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
