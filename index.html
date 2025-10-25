@@ -400,7 +400,7 @@
         .card-carousel__counter {
             color: var(--text-gray);
             font-size: 1.1rem;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Inter', sans-serif;
             min-width: 80px;
             text-align: center;
         }
@@ -794,7 +794,7 @@
             border: 2px solid var(--tertiary-bg);
             color: var(--text-light);
             font-size: 1rem;
-            font-family: 'Inter', sans-serif;
+            font-family: c;
             border-radius: 4px;
             transition: border-color 0.3s ease;
         }
@@ -832,6 +832,94 @@
             color: var(--text-gray);
             font-style: italic;
         }
+
+/* Instagram Follow Section - Premium & Elegant */
+        .instagram-follow {
+            padding: 8rem 3rem;
+            background-color: var(--primary-bg);
+            text-align: center;
+            position: relative;
+        }
+
+        .instagram-follow__container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .instagram-follow__title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .instagram-follow__handle {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .instagram-follow__subtitle {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            line-height: 1.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .instagram-follow__button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background-color: transparent;
+            color: var(--accent-gold);
+            text-decoration: none;
+            border: 2px solid var(--accent-gold);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instagram-follow__button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--accent-gold);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .instagram-follow__button:hover::before {
+            left: 0;
+        }
+
+        .instagram-follow__button:hover {
+            color: var(--primary-bg);
+            transform: translateY(-2px);
+        }
+
+        .instagram-follow__divider {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+            margin: 4rem auto 0;
+        }
+
+
 
         /* Contact Section */
         .contact {
@@ -1106,7 +1194,7 @@
 <body>
     <!-- Navigation -->
     <nav class="nav" id="nav">
-        <a href="#hero" class="nav__logo">ADHIRAAG SHIVAN</a>
+        <a href="#hero" class="nav__logo">ADHIRAAG</a>
         <ul class="nav__links">
             <li><a href="#hero" class="nav__link">Home</a></li>
             <li><a href="#gallery" class="nav__link">Gallery</a></li>
@@ -1178,26 +1266,26 @@
         </div>
     </section>
 
-    <!-- Newsletter Section -->
-    <section class="newsletter" id="newsletter">
-        <div class="newsletter__container fade-in">
-            <h2 class="newsletter__title">Join My Creative Journey</h2>
-            <p class="newsletter__subtitle">Subscribe to receive exclusive behind-the-scenes content, new collection announcements, and creative insights directly in your inbox.</p>
-            <form class="newsletter__form" action="mailto:adhiraagshivan@gmail.com" method="get" enctype="text/plain">
-                <input type="email" name="email" class="newsletter__input" placeholder="Enter your email address" required>
-                <button type="submit" class="newsletter__button">Subscribe</button>
-            </form>
-            <p class="newsletter__note">No spam, just creative updates. Unsubscribe anytime.</p>
+    
+<!-- Instagram Follow Section - Premium & Elegant -->
+    <section class="instagram-follow" id="instagram">
+        <div class="instagram-follow__container fade-in">
+            <h2 class="instagram-follow__title">Follow My Journey</h2>
+            <p class="instagram-follow__handle">@adhiraagshivan</p>
+            <p class="instagram-follow__subtitle">Join me on Instagram and view my new photoshoots, and creative inspiration. Be part of my visual storytelling journey.</p>
+            <a href="https://instagram.com/adhiraagshivan" class="instagram-follow__button" target="_blank">Follow on Instagram</a>
+            <div class="instagram-follow__divider"></div>
         </div>
     </section>
+
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <h2 class="contact__title fade-in">Let's Connect</h2>
         <p class="contact__subtitle fade-in">Follow my journey across platforms</p>
         <div class="contact__social fade-in">
-            <a href="https://instagram.com/adhiraagshivan" class="contact__social-link" target="_blank">Instagram (Photography)</a>
-            <a href="https://instagram.com/adhiraagwrites" class="contact__social-link" target="_blank">Instagram (Writing)</a>
+            <a href="https://instagram.com/adhiraagshivan" class="contact__social-link" target="_blank">Instagram </a>
+            <a href="https://instagram.com/adhiraagwrites" class="contact__social-link" target="_blank">Instagram </a>
             <a href="http://www.youtube.com/@AdhiraagWrites" class="contact__social-link" target="_blank">YouTube</a>
             <a href="https://www.linkedin.com/in/adinarayana-rameswarapu-1636a7341" class="contact__social-link" target="_blank">LinkedIn</a>
         </div>
@@ -1225,19 +1313,18 @@
         const collections = [
             {
                 id: 1,
-                title: "Urban Aesthetics",
-                subtitle: "City Streets & Concrete Dreams",
+                title: "Aesthetics",
+                subtitle: "Dreamy Visions",
                 theme: "Urban Fashion",
                 description: "Exploring the intersection of fashion and urban landscapes. Shot across city rooftops, alleyways, and architectural marvels—where raw urban energy meets refined style.",
                 story: "The city became my studio, and its architecture my backdrop. These self-portraits capture moments of stillness amidst urban chaos, where every frame tells a story of individuality in a concrete jungle.",
                 heroColor: "#2a2a2a",
                 images: [
-                    { url: "2.webp", caption: "Rooftop solitude" },
-                    { url: "3.webp", caption: "Concrete canvas" },
-                    { url: "4.webp", caption: "Urban edge" },
-                    { url: "5.webp", caption: "City lines" },
-                    { url: "6.webp", caption: "Architectural frames" },
-                    { url: "7.webp", caption: "Street style" }
+                    { url: "2.webp", caption: "Low Fidelity cool" },
+                    { url: "3.webp", caption: "Unseen Gaze" },
+                    { url: "4.webp", caption: "Shadows edge" },
+                    { url: "5.webp", caption: "Style in the Shadows" },
+                    
                 ]
             },
             {
@@ -1249,9 +1336,9 @@
                 story: "In the controlled environment of the studio, I explored the power of negative space and shadow. Each shot is meticulously self-composed, playing with light and form to create images that feel both modern and timeless.",
                 heroColor: "#1a1a1a",
                 images: [
-                    { url: "10.jpg", caption: "Shadow play" },
+                    { url: "10.jpg", caption: "The Descent" },
                     { url: "11.jpg", caption: "Minimal form" },
-                    { url: "12.jpg", caption: "Light study" },
+                    { url: "12.jpg", caption: "Formal Attire" },
                     { url: "13.jpg", caption: "Elegant simplicity" },
                 ]
             },
@@ -1264,11 +1351,11 @@
                 story: "There's something magical about natural light. These photos capture fleeting moments during golden and blue hours, where the light itself becomes a collaborator in creating mood and atmosphere.",
                 heroColor: "#d4af37",
                 images: [
-                    { url: "15.jpg", caption: "Golden embrace" },
+                    { url: "15.jpg", caption: "Spotlight Shadow" },
                     { url: "16.jpg", caption: "Sunset glow" },
                     { url: "17.jpg", caption: "Dawn reflections" },
                     { url: "18.jpg", caption: "Natural warmth" },
-                    { url: "19.jpg", caption: "Light and shadow" },
+                    
                 ]
             },
             {
@@ -1280,42 +1367,42 @@
                 story: "Not every photo needs to follow the rules. This collection celebrates creative freedom—double exposures, unusual perspectives, and artistic choices that prioritize vision over convention.",
                 heroColor: "#3a2a2a",
                 images: [
-                    { url: "25.webp", caption: "Breaking rules" },
-                    { url: "26.webp", caption: "Abstract vision" },
-                    { url: "27.webp", caption: "Experimental frame" },
-                    { url: "28.webp", caption: "Creative chaos" },
+                    { url: "25.webp", caption: "The Printed world" },
+                    { url: "26.webp", caption: "Against the noise" },
+                    { url: "27.webp", caption: "Layered Reality" },
+                    { url: "28.webp", caption: "Monochrome flow" },
                 ]
             },
             {
                 id: 4,
-                title: "Editorial Moments",
+                title: "Draped In Tradition",
                 subtitle: "High Fashion Vision",
-                theme: "Editorial Fashion",
+                theme: "Traditional Fusion",
                 description: "Bold, dramatic, and unapologetically striking. Fashion-forward self-portraits that push boundaries and challenge conventions.",
                 story: "Inspired by editorial fashion photography, this collection represents my most daring creative choices. Every outfit, every angle, every expression was carefully crafted to create images that demand attention.",
                 heroColor: "#0a0a0a",
                 images: [
-                    { url: "24.webp", caption: "Bold statement" },
-                    { url: "23.webp", caption: "Fashion narrative" },
-                    { url: "22.webp", caption: "Dramatic presence" },
-                    { url: "21.webp", caption: "Editorial edge" },
-                    { url: "20.webp", caption: "Style manifesto" },
+                    { url: "24.webp", caption: "The unveiling" },
+                    { url: "23.webp", caption: "A Black and white Tradition" },
+                    { url: "22.webp", caption: "Dhoti portrait" },
+                    { url: "21.webp", caption: "In traditional shadow" },
+                    
                 ]
             },
             {
                 id: 6,
-                title: "Experimental Concepts",
+                title: "Simple Concepts",
                 subtitle: "Creative Boundaries",
-                theme: "Conceptual Art",
+                theme: "Conceptual Vision",
                 description: "Where art meets experimentation. Unconventional angles, bold compositions, and creative risk-taking.",
                 story: "Not every photo needs to follow the rules. This collection celebrates creative freedom—double exposures, unusual perspectives, and artistic choices that prioritize vision over convention.",
                 heroColor: "#3a2a2a",
                 images: [
-                    { url: "30.jpg", caption: "Breaking rules" },
-                    { url: "33.jpg", caption: "Abstract vision" },
-                    { url: "32.jpg", caption: "Experimental frame" },
-                    { url: "29.jpg", caption: "Creative chaos" },
-                    { url: "31.jpg", caption: "Creative chaos" },
+                    { url: "30.jpg", caption: "Study in subjective time" },
+                    { url: "33.jpg", caption: "The subjective Blur" },
+                    { url: "32.jpg", caption: "Present in Transit" },
+                    { url: "29.jpg", caption: "In the zone of Focus" },
+                    
                 ]
             },
         ];
